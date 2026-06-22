@@ -1,15 +1,15 @@
-	import { useState } from 'react'
-	import './App.css'
+import './App.css'
+import { TaskList } from './components'
 
-	function App() {
+function App() {
 
-		return (
-			<>
-				<section id="center">
+	return (
+		<>
+			<section id='App'>
+				<TaskList/>
+			</section>
+		</>
+	)
+}
 
-				</section>
-			</>
-		)
-		}
-
-	export default App
+export default App
