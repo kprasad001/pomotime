@@ -81,16 +81,14 @@ const TaskList = () => {
 							task={task}
 							removing={removingIds.has(task.id)}
 							onToggle={toggleTask}
-							onRemove={(id: string) => {
-								setRemovingIds((prev) => new Set(prev).add(id));
-								setTimeout(() => removeTask(id), FADE_DURATION);
-							}}
+							
 						/>
 					))}
 				</div>
 
 				<div className='add-section' ref={formRef}> 
 					{!showAddTask && <button className='plus' onClick={handleShowAddButton}>+</button>}
+					{showAddTask && <button className='plus' onClick={handleShowAddButton} style={{visibility: 'hidden'}}>+</button>}
 					{showAddTask && <TaskForm onAdd={addTask} />}
 				</div>
 			</fieldset>

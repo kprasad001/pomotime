@@ -34,7 +34,8 @@
 	font-weight: bold;
 	color: white;
 	padding: 10px;
-	border-radius: 10px;
+	box-shadow:
+		8px 8px 0 #0f0f1a;
 	background: var(--primary);
 	-webkit-font-smoothing: none;
 }
@@ -55,6 +56,8 @@
 	padding: 0.75rem 1.5rem;
 	cursor: pointer;
 	transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
+	box-shadow:
+		4px 4px 0 #0f0f1a;
 }
 
 .Timer .controls button:hover {
@@ -62,19 +65,12 @@
 }
 
 .Timer .controls button:active {
-	transform: translate(4px, 4px);
-	box-shadow:
-		inset -3px -3px 0 #c99a00,
-		inset 3px 3px 0 #fff3b0,
-		0 0 0 #0f0f1a;
+	transform: translate(2px, 2px);
 }
 
 .Timer .controls button:nth-child(2) {
 	background: #ff4d4d;
-	box-shadow:
-		inset -3px -3px 0 #b30000,
-		inset 3px 3px 0 #ff9999,
-		4px 4px 0 #0f0f1a;
+	
 }
 
 .Timer .controls button:nth-child(2):hover {

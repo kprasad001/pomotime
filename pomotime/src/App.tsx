@@ -21,7 +21,7 @@ function App() {
 			<section id='App'>
 				<TaskList/>
 				<NightSky/>
-				<Platform isRunning={isRunning} />
+				<Platform />
 				<Timer
 				secondsLeft={secondsLeft}
 				isRunning={isRunning}
