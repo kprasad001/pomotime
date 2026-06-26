@@ -4,8 +4,12 @@
 }
 
 .grass {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	image-rendering: pixelated;
 	background-size: auto 64px;
+	max-height: 250px;
 }
 
 .Timer {
@@ -13,25 +17,25 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 1.5rem;
-	padding: 2rem;
-	background: var(--fourth);
+	width: 300px;
+	gap: 1rem;
+	padding: 0.5rem;
+	background: white;
 	border: 4px solid var(--primary);
 	box-shadow:
 		8px 8px 0 #0f0f1a;
 	image-rendering: pixelated;
+	margin-top: 10px;
 }
 
 .Timer .display {
-	font-family: Inter, monospace;
+	font-family: 'Courier New', monospace;
 	font-size: 4rem;
 	font-weight: bold;
-	letter-spacing: 0.1em;
-	color: var(--second);
-
-	background: white;
-	padding: 1rem 1.5rem;
-	border: 3px solid var(--second);
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+	background: var(--primary);
 	-webkit-font-smoothing: none;
 }
 
@@ -41,19 +45,14 @@
 }
 
 .Timer .controls button {
-	font-family: 'Courier New', monospace;
 	font-size: 0.9rem;
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 	color: #1a1a2e;
-	background: #f9c80e;
+	background: var(--second);
 	border: none;
 	padding: 0.75rem 1.5rem;
-	box-shadow:
-		inset -3px -3px 0 #c99a00,
-		inset 3px 3px 0 #fff3b0,
-		4px 4px 0 #0f0f1a;
 	cursor: pointer;
 	transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
 }

@@ -1,8 +1,12 @@
 .TaskForm {
+    position: fixed;
     display: flex;
     gap: 0.5rem;
     margin-bottom: -2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    padding: 6px;
+    background-color: var(--primary);
+    border-radius: 10px;
 }
 
 .TaskForm input {
@@ -11,5 +15,8 @@
 }
 
 .TaskForm button {
-    background-color: var(--primary);
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+    border-color: black;
 }

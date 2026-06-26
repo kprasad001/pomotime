@@ -71,25 +71,29 @@ const TaskList = () => {
 
 	return (
 		<section className="TaskList">
-		<fieldset className="ow-quest-check">
-			<legend className="ow-quest-check__legend">Daily Tasks for Ari</legend>
-			{tasks.map((task) => (
-			<TaskItem
-				key={task.id}
-				task={task}
-				removing={removingIds.has(task.id)}
-				onToggle={toggleTask}
-				onRemove={(id: string) => {
-					setRemovingIds((prev) => new Set(prev).add(id));
-					setTimeout(() => removeTask(id), FADE_DURATION);
-				}}
-			/>
-			))}		
-			<div ref={formRef}>
-				{!showAddTask && <button onClick={handleShowAddButton}>+</button>}
-				{showAddTask && <TaskForm onAdd={addTask} />}
-			</div>
-		</fieldset>
+			<fieldset className="ow-quest-check">
+				<legend className="ow-quest-check__legend">Daily Tasks for Ari</legend>
+
+				<div className="ow-quest-check__items"> {/* scrollable area */}
+					{tasks.map((task) => (
+						<TaskItem
+							key={task.id}
+							task={task}
+							removing={removingIds.has(task.id)}
+							onToggle={toggleTask}
+							onRemove={(id: string) => {
+								setRemovingIds((prev) => new Set(prev).add(id));
+								setTimeout(() => removeTask(id), FADE_DURATION);
+							}}
+						/>
+					))}
+				</div>
+
+				<div className='add-section' ref={formRef}> 
+					{!showAddTask && <button className='plus' onClick={handleShowAddButton}>+</button>}
+					{showAddTask && <TaskForm onAdd={addTask} />}
+				</div>
+			</fieldset>
 		</section>
 	);
 }

@@ -2,8 +2,8 @@
 import { night } from '../../assets';
 import { useFrameCycle } from '../../hooks';
 
-const FRAME_WIDTH = 450;   // ← set to your actual single-frame width
-const FRAME_HEIGHT = 450;  // ← set to your actual single-frame height
+const FRAME_WIDTH = 500;   // ← set to your actual single-frame width
+const FRAME_HEIGHT = 500;  // ← set to your actual single-frame height
 const FRAME_COUNT = 2;
 
 const NightSky = () => {
