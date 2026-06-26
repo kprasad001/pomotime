@@ -1,8 +1,18 @@
+:root {
+	--primary: #5E244E;
+	--second: #AA1C41;
+	--third: #E68457;
+	--fourth: #FFE8B4;
+}
+
 #App {
-	width: 100%;
-	height: 80vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: solid 4px black;
+    position: relative;     /* anchors NightSky's absolute positioning to this box */
+    width: 500px;
+    height: 750px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid 4px black;
+    overflow: hidden;       /* clips sky to stay inside the border */
 }

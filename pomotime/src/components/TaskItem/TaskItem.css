@@ -1,4 +1,4 @@
-.ow-quest-check {
+.TaskItem .ow-quest-check {
     display: block;
     width: 340px;
     max-width: 100%;
@@ -11,7 +11,7 @@
     color: var(--color-ink, #161310);
   }
 
-  .ow-quest-check__legend {
+.TaskItem .ow-quest-check__legend {
     display: inline-block;
     font-family: var(--font-hud, "VT323", ui-monospace, monospace);
     font-size: 18px;
@@ -25,7 +25,7 @@
     margin-bottom: 12px;
   }
 
-  .ow-quest-check__row {
+.TaskItem .ow-quest-check__row {
     display: grid;
     grid-template-columns: 22px 1fr auto;
     align-items: center;
@@ -36,12 +36,12 @@
     border-bottom: 2px dotted var(--color-border-tan, #d9cdb3);
   }
 
-  .ow-quest-check__row:last-of-type {
+.TaskItem .ow-quest-check__row:last-of-type {
     border-bottom: none;
     padding-bottom: 2px;
   }
 
-  .ow-quest-check__row input[type="checkbox"] {
+.TaskItem .ow-quest-check__row input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     width: 22px;
@@ -57,51 +57,51 @@
     transition: background-color 100ms ease;
   }
 
-  .ow-quest-check__row input[type="checkbox"]:checked {
+.TaskItem .ow-quest-check__row input[type="checkbox"]:checked {
     background-color: var(--color-sky-cobalt, #2e5dd6);
   }
 
-  .ow-quest-check__row input[type="checkbox"]:checked::before,
-  .ow-quest-check__row input[type="checkbox"]:checked::after {
+.TaskItem  .ow-quest-check__row input[type="checkbox"]:checked::before,
+.TaskItem  .ow-quest-check__row input[type="checkbox"]:checked::after {
     content: "";
     position: absolute;
     background-color: var(--color-bone, #fffaef);
   }
 
-  .ow-quest-check__row input[type="checkbox"]:checked::before {
+.TaskItem  .ow-quest-check__row input[type="checkbox"]:checked::before {
     width: 4px;
     height: 8px;
     left: 4px;
     bottom: 4px;
   }
 
-  .ow-quest-check__row input[type="checkbox"]:checked::after {
+.TaskItem  .ow-quest-check__row input[type="checkbox"]:checked::after {
     width: 10px;
     height: 4px;
     left: 4px;
     bottom: 4px;
   }
 
-  .ow-quest-check__row input[type="checkbox"]:focus-visible {
+.TaskItem  .ow-quest-check__row input[type="checkbox"]:focus-visible {
     outline: 3px solid var(--color-sky-cobalt, #2e5dd6);
     outline-offset: 2px;
   }
 
-  .ow-quest-check__copy {
+.TaskItem  .ow-quest-check__copy {
     font-family: var(--font-body, "Inter", ui-sans-serif, sans-serif);
     font-size: 15px;
     line-height: 1.3;
     color: var(--color-ink, #161310);
   }
 
-  .ow-quest-check__row input[type="checkbox"]:checked ~ .ow-quest-check__copy {
+.TaskItem  .ow-quest-check__row input[type="checkbox"]:checked ~ .ow-quest-check__copy {
     color: var(--color-ink-soft, #3a332a);
     text-decoration: line-through;
     text-decoration-color: var(--color-pine-moss, #2f6e4f);
     text-decoration-thickness: 2px;
   }
 
-  .ow-quest-check__xp {
+.TaskItem  .ow-quest-check__xp {
     font-family: var(--font-hud, "VT323", ui-monospace, monospace);
     font-size: 16px;
     letter-spacing: 0.04em;
@@ -110,7 +110,7 @@
     text-transform: uppercase;
   }
 
-  .ow-quest-check__row input[type="checkbox"]:checked ~ .ow-quest-check__xp {
+.TaskItem  .ow-quest-check__row input[type="checkbox"]:checked ~ .ow-quest-check__xp {
     color: var(--color-ink-soft, #3a332a);
     text-decoration: line-through;
   }

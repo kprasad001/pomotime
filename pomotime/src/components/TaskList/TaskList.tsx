@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './TaskList.css'
 import type { Task } from '../../types';
 import TaskItem from '../TaskItem/TaskItem';
@@ -9,66 +9,89 @@ const STORAGE_KEY = 'pomodoro-tasks';
 const FADE_DURATION = 400; // ms — must match the CSS transition duration
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState<Task[]>(() =>
-    loadTasks<Task[]>(STORAGE_KEY, [])
-  );
-  const [removingIds, setRemovingIds] = useState<Set<string>>(new Set());
+	const [tasks, setTasks] = useState<Task[]>(() =>
+		loadTasks<Task[]>(STORAGE_KEY, [])
+	);
+	const [removingIds, setRemovingIds] = useState<Set<string>>(new Set());
+	const [showAddTask, setShowAddTask] = useState<boolean>(false)
 
-  useEffect(() => {
-    saveTasks(STORAGE_KEY, tasks);
-  }, [tasks]);
+	useEffect(() => {
+		saveTasks(STORAGE_KEY, tasks);
+	}, [tasks]);
 
-  const addTask = (title: string) => {
-    const newTask: Task = {
-      id: crypto.randomUUID(),
-      title,
-      completed: false,
-      pomodorosSpent: 0,
-    };
-    setTasks((prev) => [...prev, newTask]);
-  };
+	const formRef = useRef<HTMLDivElement>(null);
 
-  const removeTask = (id: string) => {
-    setTasks((prev) => prev.filter((t) => t.id !== id));
-    setRemovingIds((prev) => {
-      const next = new Set(prev);
-      next.delete(id);
-      return next;
-    });
-  };
+	useEffect(() => {
+		const handleClick = (e: MouseEvent) => {
+			if (
+			showAddTask &&
+			formRef.current &&
+			!formRef.current.contains(e.target as Node)
+			) {
+			setShowAddTask(false);
+			}
+		};
 
-  const toggleTask = (id: string) => {
-    setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
-    );
+		document.addEventListener('mousedown', handleClick);
+		return () => document.removeEventListener('mousedown', handleClick);
+	}, [showAddTask]);
 
-    // Mark as removing so the CSS fade kicks in, then actually remove
-    setRemovingIds((prev) => new Set(prev).add(id));
-    setTimeout(() => removeTask(id), FADE_DURATION);
-  };
+	const addTask = (title: string) => {
+		const newTask: Task = {
+		id: crypto.randomUUID(),
+		title,
+		completed: false,
+		pomodorosSpent: 0,
+		};
+		setTasks((prev) => [...prev, newTask]);
+	};
 
-  return (
-    <section className="TaskList">
-      <fieldset className="ow-quest-check">
-        <legend className="ow-quest-check__legend">Daily Tasks for Ari</legend>
+	const removeTask = (id: string) => {
+		setTasks((prev) => prev.filter((t) => t.id !== id));
+		setRemovingIds((prev) => {
+			const next = new Set(prev);
+			next.delete(id);
+		return next;
+		});
+	};
 
-        {tasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            removing={removingIds.has(task.id)}
-            onToggle={toggleTask}
-            onRemove={(id) => {
-              setRemovingIds((prev) => new Set(prev).add(id));
-              setTimeout(() => removeTask(id), FADE_DURATION);
-            }}
-          />
-        ))}
+	const toggleTask = (id: string) => {
+		setTasks((prev) =>
+			prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+		);
 
-        <TaskForm onAdd={addTask} />
-      </fieldset>
-    </section>
-  );
+		// Mark as removing so the CSS fade kicks in, then actually remove
+		setRemovingIds((prev) => new Set(prev).add(id));
+		setTimeout(() => removeTask(id), FADE_DURATION);
+	};
+
+	function handleShowAddButton() {
+		setShowAddTask(true)
+	};
+
+	return (
+		<section className="TaskList">
+		<fieldset className="ow-quest-check">
+			<legend className="ow-quest-check__legend">Daily Tasks for Ari</legend>
+			{tasks.map((task) => (
+			<TaskItem
+				key={task.id}
+				task={task}
+				removing={removingIds.has(task.id)}
+				onToggle={toggleTask}
+				onRemove={(id: string) => {
+					setRemovingIds((prev) => new Set(prev).add(id));
+					setTimeout(() => removeTask(id), FADE_DURATION);
+				}}
+			/>
+			))}		
+			<div ref={formRef}>
+				{!showAddTask && <button onClick={handleShowAddButton}>+</button>}
+				{showAddTask && <TaskForm onAdd={addTask} />}
+			</div>
+		</fieldset>
+		</section>
+	);
 }
 
 export default TaskList;
