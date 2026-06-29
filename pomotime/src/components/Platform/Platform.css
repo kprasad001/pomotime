@@ -1,0 +1,15 @@
+.Platform {
+	position: relative;
+	width: 100%;
+}
+
+.Platform .ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 64px; /* pick a height matching how tall you want the grass strip */
+    background-repeat: repeat-x;
+    background-size: auto 64px; /* match the height above so it doesn't stretch/squash */
+    image-rendering: pixelated;
+}

@@ -1,16 +1,25 @@
-import { useState } from 'react'
-import './App.css'
+import './TaskItem.css'
+import type { Task } from '../../types';
 
-function App() {
-    const [count, setCount] = useState(0)
-
-    return (
-        <>
-            <section id="center">
-                
-            </section>
-        </>
-    )
+interface TaskItemProps {
+    task: Task;
+    removing: boolean;
+    onToggle: (id: string) => void;
 }
 
-export default App
+const TaskItem = ({ task, removing, onToggle }: TaskItemProps) => {
+    return (
+        <section className={`TaskItem ${removing ? 'TaskItem--removing' : ''}`}>
+            <label className="ow-quest-check__row">
+                <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => onToggle(task.id)}
+                />
+                <span className="ow-quest-check__copy">{task.title}</span>
+            </label>
+        </section>
+    );
+}
+
+export default TaskItem;
