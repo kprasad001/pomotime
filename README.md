@@ -48,7 +48,3 @@ npm run dev
 ├── node_modules/         # Modules
 └── package.json          # Project dependencies and scripts
 ```
-
-## 📜 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
