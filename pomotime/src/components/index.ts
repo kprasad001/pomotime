@@ -5,4 +5,5 @@ export { default as TaskForm } from './TaskForm/TaskForm';
 export { default as Sprite } from './Sprite/Sprite.tsx';
 export { default as IconsBar } from './IconsBar/IconsBar.tsx';
 export { default as Grass } from './Grass/Grass.tsx';
-
+export { default as TimeSelect } from './TimeSelect/TimeSelect.tsx';
+export { default as TimeOption } from './TimeOption/TimeOption.tsx';

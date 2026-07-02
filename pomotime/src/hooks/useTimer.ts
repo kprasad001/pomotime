@@ -8,6 +8,7 @@ interface UseTimerOptions {
 export default function useTimer({ durationSeconds, onComplete }: UseTimerOptions) {
     const [secondsLeft, setSecondsLeft] = useState(durationSeconds);
     const [isRunning, setIsRunning] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
     const endTimeRef = useRef<number | null>(null);
 
     // Tick every second while running
@@ -22,6 +23,7 @@ export default function useTimer({ durationSeconds, onComplete }: UseTimerOption
             if (remaining <= 0) {
                 setSecondsLeft(0);
                 setIsRunning(false);
+                setIsPaused(false);
                 onComplete?.();
             } else {
                 setSecondsLeft(remaining);
@@ -31,9 +33,16 @@ export default function useTimer({ durationSeconds, onComplete }: UseTimerOption
         return () => clearInterval(interval);
     }, [isRunning, onComplete]);
 
-    const start = useCallback(() => {
-        endTimeRef.current = Date.now() + secondsLeft * 1000;
+    const start = useCallback((newDurationSeconds?: number) => {
+        const durationToUse = newDurationSeconds ?? secondsLeft;
+
+        if (newDurationSeconds !== undefined) {
+            setSecondsLeft(newDurationSeconds);
+        }
+
+        endTimeRef.current = Date.now() + durationToUse * 1000;
         setIsRunning(true);
+        setIsPaused(false);
     }, [secondsLeft]);
 
     const pause = useCallback(() => {
@@ -42,13 +51,15 @@ export default function useTimer({ durationSeconds, onComplete }: UseTimerOption
         setSecondsLeft(Math.max(remaining, 0));
         }
         setIsRunning(false);
+        setIsPaused(true);
     }, []);
 
     const reset = useCallback((newDuration: number = durationSeconds) => {
         setIsRunning(false);
+        setIsPaused(false);
         endTimeRef.current = null;
         setSecondsLeft(newDuration);
     }, [durationSeconds]);
 
-    return { secondsLeft, isRunning, start, pause, reset };
+    return { secondsLeft, isRunning, isPaused, start, pause, reset };
 }

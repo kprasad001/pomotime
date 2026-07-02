@@ -1,24 +1,62 @@
 // App.tsx
 import './App.css'
-import { Grass, IconsBar, TaskList, Timer } from './components'
+import { Grass, IconsBar, TaskList, Timer, TimeSelect } from './components'
 import NightSky from './components/NightSky/NightSky';
 import Platform from './components/Platform/Platform'
+import { useState } from 'react';
 import { useTimer } from './hooks';
 
-const WORK_DURATION = 25 * 60;
-
 function App() {
-	const { secondsLeft, isRunning, start, pause, reset } = useTimer({
-		durationSeconds: WORK_DURATION,
+	const [selectedMinutes, setSelectedMinutes] = useState(25);
+	const [timerSelectShow, setTimerSelectShow] = useState(false)
+	const [hasChosenTime, setHasChosenTime] = useState(false)
+	const { secondsLeft, isRunning, isPaused, start, pause, reset } = useTimer({
+		durationSeconds: selectedMinutes * 60,
 		onComplete: () => {
 		console.log('Pomodoro finished!');
 		},
 	});
 
+	const handleTimeSelect = (minutes: number) => {
+		setSelectedMinutes(minutes);
+		setHasChosenTime(true);
+		setTimerSelectShow(false);
+		start(minutes * 60);
+	};
+
+	const handleOpenSelection = () => {
+		setTimerSelectShow(true);
+		reset(selectedMinutes * 60);
+	};
+
+	const handleStartClick = () => {
+		if (!hasChosenTime) {
+			setTimerSelectShow(true);
+			return;
+		}
+
+		start();
+	};
+
+	const handleCloseSelection = () => {
+		setTimerSelectShow(false);
+		reset(selectedMinutes * 60);
+	};
+
 	return (
 		<>
 			<NightSky/>
 			<section id='App'>
+				{timerSelectShow && (
+					<div
+						className="TimeSelectBackdrop"
+						aria-hidden="true"
+						onClick={handleCloseSelection}
+					/>
+				)}
+				{timerSelectShow && (
+					<TimeSelect onSelect={handleTimeSelect} selectedMinutes={selectedMinutes}/>
+				)}
 				<TaskList/>
 				<NightSky/>
 				<Platform />
@@ -27,9 +65,13 @@ function App() {
 				<Timer
 					secondsLeft={secondsLeft}
 					isRunning={isRunning}
+					isPaused={isPaused}
 					start={start}
+					onStartClick={handleStartClick}
 					pause={pause}
-					reset={reset}
+					startDisabled={timerSelectShow}
+					showCancelButton={hasChosenTime && !timerSelectShow}
+					onCancelSelection={handleOpenSelection}
 				/>
 			</section>
 		</>
