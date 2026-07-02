@@ -1,6 +1,6 @@
 // App.tsx
 import './App.css'
-import { TaskList, Timer } from './components'
+import { Grass, IconsBar, TaskList, Timer } from './components'
 import NightSky from './components/NightSky/NightSky';
 import Platform from './components/Platform/Platform'
 import { useTimer } from './hooks';
@@ -22,12 +22,14 @@ function App() {
 				<TaskList/>
 				<NightSky/>
 				<Platform />
+				<Grass/>
+				<IconsBar/>
 				<Timer
-				secondsLeft={secondsLeft}
-				isRunning={isRunning}
-				start={start}
-				pause={pause}
-				reset={reset}
+					secondsLeft={secondsLeft}
+					isRunning={isRunning}
+					start={start}
+					pause={pause}
+					reset={reset}
 				/>
 			</section>
 		</>
