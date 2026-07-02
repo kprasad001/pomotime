@@ -3,16 +3,29 @@ import './App.css'
 import { Grass, IconsBar, TaskList, Timer, TimeSelect } from './components'
 import NightSky from './components/NightSky/NightSky';
 import Platform from './components/Platform/Platform'
-import { useState } from 'react';
+import alarmBird from './assets/alarmbird.mp3';
+import { useRef, useState } from 'react';
 import { useTimer } from './hooks';
 
 function App() {
 	const [selectedMinutes, setSelectedMinutes] = useState(25);
 	const [timerSelectShow, setTimerSelectShow] = useState(false)
 	const [hasChosenTime, setHasChosenTime] = useState(false)
+	const alarmAudioRef = useRef<HTMLAudioElement | null>(null);
+
+	if (alarmAudioRef.current === null) {
+		alarmAudioRef.current = new Audio(alarmBird);
+	}
+
 	const { secondsLeft, isRunning, isPaused, start, pause, reset } = useTimer({
 		durationSeconds: selectedMinutes * 60,
 		onComplete: () => {
+			if (alarmAudioRef.current) {
+				alarmAudioRef.current.currentTime = 0;
+				void alarmAudioRef.current.play().catch(() => {
+					console.log('Alarm sound could not play automatically.');
+				});
+			}
 		console.log('Pomodoro finished!');
 		},
 	});
