@@ -1,0 +1,9 @@
+.grass {
+    position: absolute;
+	image-rendering: pixelated;
+	background-size: auto 64px;
+	max-height: 250px;
+    width: 300px;
+    bottom: 0;
+    z-index: 0;
+}

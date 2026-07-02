@@ -8,11 +8,20 @@
 #App {
     position: relative;     /* anchors NightSky's absolute positioning to this box */
     width: 500px;
-    height: 750px;
+    height: 760px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border: solid 4px black;
     overflow: hidden;       /* clips sky to stay inside the border */
+}
+
+.TimeSelectBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    cursor: pointer;
 }
