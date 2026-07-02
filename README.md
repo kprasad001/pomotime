@@ -1,10 +1,11 @@
 # Pomotime
 
-A lightweight, terminal-based Pomodoro timer built with TypeScript to help you stay focused and productive.
+A lightweight, terminal-based Pomodoro timer built with TypeScript to help you stay focused and productive that I made for my girlfriend for our anniversary.
 
 ## Features
 
 * **Audio Alerts**: Plays a sound when a session ends.
+* **Choose Time Length**: Choose between 25, 50, and 100 minutes.
 * **Animations**: Fun animations of dogs.
 * **Pause/Resume**: Full control over your current timer state.
 
